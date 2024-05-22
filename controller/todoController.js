@@ -2,10 +2,11 @@ const todoController={}
 const Todo=require('../model/Todo')
 todoController.addTodo=async(req,res)=>{
   try{
-    const {task,isCompleted}=req.body;
+    const {task,isCompleted,category}=req.body;
     const newTodo=new Todo({
       task,
-      isCompleted
+      isCompleted,
+      category
     })
     await newTodo.save();
     res.status(200).json({status:'success',newTodo})
@@ -16,7 +17,7 @@ todoController.addTodo=async(req,res)=>{
 
 todoController.getTodo=async(req,res)=>{
   try{
-    const todos=await Todo.find();
+    const todos=await Todo.find({});
     if(!todos)throw new Error('No todos list found')
     res.status(200).json({status:'success',todos})
   }catch(error){
@@ -27,10 +28,12 @@ todoController.getTodo=async(req,res)=>{
 todoController.updateTodo=async(req,res)=>{
   try{
     const {id}=req.params;
-    const {task,isCompleted}=req.body;
+    const {isComplete}=req.body;
+    console.log(isComplete)
     const updated = await Todo.findByIdAndUpdate(
       {_id:id},
-      {task,isCompleted},
+      {isComplete},
+     
       {new:true}
     );
     if(!updated)throw new Error('No todo found')

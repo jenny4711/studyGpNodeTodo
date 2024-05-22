@@ -10,6 +10,11 @@ const todoSchema=Schema({
     isComplete:{
         type:Boolean,
         default:false
+    },
+    category:{
+        type:String,
+        required:true,
+        default:'general'
     }
 },{timestamps:true});
 todoSchema.methods.toJSON = function(){
