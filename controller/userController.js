@@ -18,7 +18,8 @@ userController.signup = async (req, res) => {
         password: hashedPassword
       });
       await newUser.save();
-      res.status(200).json({status:'success-signup',newUser});
+      const token = await newUser.generateToken();
+      res.status(200).json({status:'success-signup',newUser,token});
 
       
 
