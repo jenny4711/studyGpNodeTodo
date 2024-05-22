@@ -25,7 +25,7 @@ userController.signup = async (req, res) => {
     
 
   }catch(error){
-    res.status(400).json({status:'fail',message:error.message});
+    res.status(400).json({status:'fail-signup',message:error.message});
   }
 }
 
@@ -39,7 +39,7 @@ userController.login = async (req, res) => {
     const token = await user.generateToken();
     return res.status(200).json({status:'success-login',user,token});
   }catch(error){
-    res.status(400).json({status:'fail',message:error.message});
+    res.status(400).json({status:'fail-login',message:error.message});
   }
 }
 
