@@ -32,7 +32,7 @@ todoController.updateTodo=async(req,res)=>{
   try{
     const {id}=req.params;
     const {isComplete}=req.body;
-    console.log(isComplete)
+   
     const updated = await Todo.findByIdAndUpdate(
       {_id:id},
       {isComplete},
