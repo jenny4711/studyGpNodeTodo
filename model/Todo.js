@@ -15,6 +15,10 @@ const todoSchema=Schema({
         type:String,
         required:true,
         default:'general'
+    },
+    email:{
+        type:String,
+        required:true
     }
 },{timestamps:true});
 todoSchema.methods.toJSON = function(){
