@@ -9,7 +9,7 @@ authController.authenticate = (req, res,next) => {
     const token = tokenString.split(' ')[1];
     jwt.verify(token,JWT_SECRET_KEY,(error,payload)=>{
       if(error) throw new Error('Invalid token');
-      console.log(payload,'payload!!!!!!!!!')
+      
       req.userId = payload._id;
      next();
     
