@@ -50,7 +50,9 @@ userController.getUser=async(req,res) =>{
     const user = User.findById(userId)
     if(!user)throw new Error('User not found')
     res.status(200).json({status:'success-getUser',user})
-  }catch(error){}
+  }catch(error){
+    res.status(400).json({status:'fail-getUser',message:error.message});
+  }
 }
 
 
