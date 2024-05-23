@@ -1,7 +1,7 @@
 const userController={};
 const User = require('../model/User');
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+
 
 userController.signup = async (req, res) => {
   try{
@@ -10,7 +10,7 @@ userController.signup = async (req, res) => {
     const user = await User.findOne({email: email});
   
     if(user) throw new Error('User already exists');
-    const salt = await bcrypt.genSaltSync(10);
+    const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
       const newUser= new User({
         name,
