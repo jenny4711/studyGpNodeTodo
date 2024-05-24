@@ -23,7 +23,8 @@ todoController.addTodo=async(req,res)=>{
 todoController.getTodo=async(req,res)=>{
   try{
     const {email}=req.params;
-    const todos=await Todo.find({email});
+    const userId=req.userId;
+    const todos=await Todo.find({email}).populate('userId');
     if(!todos)throw new Error('No todos list found')
       
     res.status(200).json({status:'success',todos})
