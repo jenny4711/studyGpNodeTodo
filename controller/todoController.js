@@ -5,6 +5,7 @@ todoController.addTodo=async(req,res)=>{
   try{
     const {task,isCompleted,category,email}=req.body;
     const {userId}=req;
+    console.log(email,'userIdAddTodo11')
     const newTodo=new Todo({
       task,
       isCompleted,
@@ -16,6 +17,7 @@ todoController.addTodo=async(req,res)=>{
    
     res.status(200).json({status:'success',newTodo})
   }catch(error){
+    console.log(error.message,'addTodofail')
     res.status(500).json({status:'fail',message:error.message})
   }
 }
