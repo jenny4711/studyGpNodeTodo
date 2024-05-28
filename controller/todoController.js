@@ -5,15 +5,17 @@ todoController.addTodo=async(req,res)=>{
   try{
     const {task,isCompleted,category,email}=req.body;
     const {userId}=req;
-    console.log(email,'userIdAddTodo11')
-    const newTodo=new Todo({
+    if(!userId)throw new Error('User not authenticated')
+    const newTodo= new Todo({
       task,
       isCompleted,
       category,
       userId ,
       email
     })
+    console.log(newTodo,'newTodo!!!')
     await newTodo.save();
+   
    
     res.status(200).json({status:'success',newTodo})
   }catch(error){
@@ -26,7 +28,7 @@ todoController.getTodo=async(req,res)=>{
   try{
     const {email}=req.params;
     const userId=req.userId;
-    const todos=await Todo.find({email}).populate('userId');
+    const todos= await Todo.find({email}).populate('userId');
     if(!todos)throw new Error('No todos list found')
       
     res.status(200).json({status:'success',todos})

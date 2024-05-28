@@ -6,8 +6,8 @@ const bcrypt = require('bcryptjs');
 userController.signup = async (req, res) => {
   try{
     const { name,email, password } = req.body;
-    
-    const user = await User.findOne({email: email});
+    console.log(email,'email')
+    const user = await User.findOne({email});
   
     if(user) throw new Error('User already exists');
     const salt = await bcrypt.genSalt(10);
@@ -19,13 +19,14 @@ userController.signup = async (req, res) => {
       });
       await newUser.save();
       const token = await newUser.generateToken();
-      res.status(200).json({status:'success-signup',newUser,token});
+      res.status(200).json({status:'success-signup',user:newUser,token});
 
       
 
     
 
   }catch(error){
+    console.log(error,'signup!!!!!!!!')
     res.status(400).json({status:'fail-signup',message:error.message});
   }
 }

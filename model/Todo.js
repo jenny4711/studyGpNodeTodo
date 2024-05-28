@@ -17,7 +17,7 @@ const todoSchema=Schema({
         default:'general'
     },
     userId:{
-        type:(Schema.Types.ObjectId),
+        type:Schema.Types.ObjectId,
         required:true,
         ref:'User'
     },
